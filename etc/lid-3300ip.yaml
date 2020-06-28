@@ -1,0 +1,13 @@
+# LID-3300IP config
+#
+
+ser_port: "/dev/ttyUSB0"
+
+sql_host: "127.0.0.1"
+sql_port: 3306
+sql_user: "pybkotec"
+sql_passwd: ""
+sql_database: "pybkotec"
+sql_table: "lid3300ip"
+
+meas_interval: 60
