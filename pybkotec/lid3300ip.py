@@ -62,7 +62,7 @@ class LID3300IPDatabase(Database):
 	def insert(self, meas):
 		cmd = "INSERT INTO {}.{} (ID, DateTime, TempSensor, TempOut, Ice, Mode, Fail) VALUES (NULL, \"{}\", {}, {}, {}, {}, {})".format(
 			self.database, self.table,
-			meas["DateTime"].strftime("%y-%m-%d %H:%M:%S"),
+			meas["DateTime"].strftime("%Y-%m-%d %H:%M:%S"),
 			meas["TempSensor"],
 			meas["TempOut"],
 			meas["Ice"],
@@ -140,10 +140,9 @@ class LID3300IP(Device):
 	async def close(self):
 		self._ser.close()
 	
-	async def _reconnect(self):
-		count = 1
-		while count <= 10:
-			logging.info("Reconnect attempt {}/{}".format(count, 10))
+	async def _reconnect(self, n):
+		for i in range(1, n+1):
+			logging.info("Reconnect attempt {}/{}".format(i, n))
 			if await self._connect():
 				return True
 			await asyncio.sleep(60)
