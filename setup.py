@@ -14,6 +14,9 @@ setup(
 	packages=find_packages(),
 	
 	install_requires=requirements,
+	extras_require={
+		"lid3300ip": ["pyserial>=3.4"]
+	},
 	
 	author="Eero Molkoselkä",
 	author_email="eero.molkoselka@gmail.com",
