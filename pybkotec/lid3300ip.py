@@ -44,12 +44,12 @@ class LID3300IPConfig(Config):
 class LID3300IPDatabase(Database):
 	def open(self):
 		super().open()
-		cmd = "CREATE DATABASE IF NOT EXISTS {}".format(self.database)
+		cmd = "CREATE DATABASE IF NOT EXISTS `{}`".format(self.database)
 		self.sql([cmd])
 		cmd = createTableFmt = ""\
-			"CREATE TABLE IF NOT EXISTS {}.{} ("\
+			"CREATE TABLE IF NOT EXISTS `{}`.`{}` ("\
 			"ID INT UNSIGNED NOT NULL AUTO_INCREMENT,"\
-			"DateTime DATETIME(0) NOT NULL,"\
+			"DateTime DATETIME NOT NULL,"\
 			"TempSensor FLOAT NOT NULL,"\
 			"TempOut FLOAT NOT NULL,"\
 			"Ice TINYINT UNSIGNED NOT NULL,"\
@@ -60,7 +60,7 @@ class LID3300IPDatabase(Database):
 		self.sql([cmd])
 	
 	def insert(self, meas):
-		cmd = "INSERT INTO {}.{} (ID, DateTime, TempSensor, TempOut, Ice, Mode, Fail) VALUES (NULL, \"{}\", {}, {}, {}, {}, {})".format(
+		cmd = "INSERT INTO `{}`.`{}` (ID, DateTime, TempSensor, TempOut, Ice, Mode, Fail) VALUES (NULL, \"{}\", {}, {}, {}, {}, {})".format(
 			self.database, self.table,
 			meas["DateTime"].strftime("%Y-%m-%d %H:%M:%S"),
 			meas["TempSensor"],
